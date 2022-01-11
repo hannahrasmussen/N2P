@@ -15,7 +15,7 @@ from DES import Differential_Equation_Solver as DES
 
 alpha = 1/137 
 btop_ratio = 6.11*10**-10
-D = 1  
+D = 1/1.79**3
 dmnp = 1.29332 
 f_pi = 131 
 gA = 1.27 
@@ -294,10 +294,9 @@ def driver(a_arr, e_mat, f_mat, T_arr, t_arr, ms, mixangle):
         H_part1 = 8 * np.pi / (3 * mPL**2)
         H_part3 = T_arr[i]**4 * np.pi**2 / 15 
         H_part4 = 2 * T_arr[i]**4 * calculate_integral(I1,me/T_arr[i]) / np.pi**2 
-        H_part5 = 0 #7/8 * np.pi**2/30 * 6 * Tcm_arr[i]**4  
         H_part6 = ms*ns(Tcm_arr[i],t_arr[i],ms,mixangle)
         H_part7 = (Tcm_arr[i]**4/(2*np.pi**2))*newtrapezoid(f_arr*e_arr**3,e_arr)
-        H[i] = np.sqrt(H_part1 * (H_part3 + H_part4 + H_part5 + H_part6 + H_part7)) / hbar
+        H[i] = np.sqrt(H_part1 * (H_part3 + H_part4 + H_part6 + H_part7))/hbar
         n_to_p[i] = varlam_np(a_arr[i], e_arr, eta_arr[i], f_arr, T_arr[i])/hbar
         p_to_n[i] = varlam_pn(a_arr[i], e_arr, eta_arr[i], f_arr, T_arr[i])/hbar
     
